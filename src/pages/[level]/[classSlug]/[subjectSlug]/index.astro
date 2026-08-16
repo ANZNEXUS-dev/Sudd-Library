@@ -31,6 +31,7 @@ const byType: Record<ResourceType, typeof matching> = {
   notes: matching.filter((r) => r.data.type === 'notes'),
   schemes: matching.filter((r) => r.data.type === 'schemes'),
   'past-papers': matching.filter((r) => r.data.type === 'past-papers'),
+  'holiday-packages': matching.filter((r) => r.data.type === 'holiday-packages'),
 };
 ---
 <BaseLayout title={`${subject.name} — ${cls.name}`}>
