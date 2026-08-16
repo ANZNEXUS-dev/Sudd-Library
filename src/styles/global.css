@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Sudd Library — site palette (South Sudan flag-derived) */
+  --deep: #0f4788;
+  --deep-hover: #0a3567;
+  --blue: #0f4788;
+  --gold: #f2c411;
+  --gold-deep: #c89a0a;
+  --red: #ca2820;
+  --green: #148540;
+  --paper: #f3f6fa;
+  --paper-2: #e9eef5;
+  --ink: #10182a;
+  --ink-60: rgba(16, 24, 42, 0.6);
+  --ink-35: rgba(16, 24, 42, 0.35);
+  --line: rgba(16, 24, 42, 0.12);
+  --white: #ffffff;
+
+  /* ANZ NEXUS — footer-only, independent of the site palette above */
+  --anz-deep: #10201c;
+
+  --radius: 16px;
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Work Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --max-width: 720px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+:focus-visible {
+  outline: 2px solid var(--deep-hover);
+  outline-offset: 2px;
+}
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+.section-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-35);
+  margin: 28px 0 12px;
+}

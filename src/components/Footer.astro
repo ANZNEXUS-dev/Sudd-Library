@@ -1,0 +1,69 @@
+---
+import { SITE } from '../data/site';
+const waReport = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Hi, I found a broken link on Sudd Library: ')}`;
+const waContact = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Hi, I have a question about Sudd Library: ')}`;
+---
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <svg width="20" height="20" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <path d="M20 15 L50 45" stroke="#2CA58D" stroke-width="13" stroke-linecap="round" />
+        <path d="M80 15 L50 45" stroke="#2CA58D" stroke-width="13" stroke-linecap="round" />
+        <path d="M50 53 L50 90" stroke="#D4A72C" stroke-width="13" stroke-linecap="round" />
+        <circle cx="50" cy="45" r="11" fill="#fff" />
+      </svg>
+      <span class="footer-word">{SITE.org}</span>
+    </div>
+    <nav class="footer-links">
+      <a href={SITE.repoUrl} target="_blank" rel="noopener">GitHub ↗</a>
+      <a href={`${SITE.repoUrl}/blob/main/DISCLAIMER.md`} target="_blank" rel="noopener">Disclaimer</a>
+      <a href={waReport} target="_blank" rel="noopener">Report a broken link</a>
+      <a href={waContact} target="_blank" rel="noopener">Contact</a>
+    </nav>
+    <p class="footer-fine">Site by {SITE.org} · Open source · © {new Date().getFullYear()}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--anz-deep);
+    margin-top: 48px;
+  }
+  .footer-inner {
+    padding: 22px 18px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer-word {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    color: rgba(241, 245, 242, 0.85);
+  }
+  .footer-links {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: rgba(241, 245, 242, 0.55);
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-fine {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: rgba(241, 245, 242, 0.3);
+    padding-top: 8px;
+    margin: 0;
+    border-top: 1px solid rgba(241, 245, 242, 0.1);
+  }
+</style>

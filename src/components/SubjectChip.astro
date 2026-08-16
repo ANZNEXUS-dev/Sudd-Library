@@ -1,0 +1,49 @@
+---
+interface Props {
+  name: string;
+  href: string;
+  group: 'stem' | 'language' | 'humanities';
+  count?: number;
+}
+const { name, href, group, count } = Astro.props as Props;
+---
+<a class="chip" href={href}>
+  <span class="chip-top">
+    <span class={`chip-dot dot-${group}`}></span>
+    {count ? <span class="chip-count">{count} file{count === 1 ? '' : 's'}</span> : null}
+  </span>
+  <span class="chip-name">{name}</span>
+</a>
+
+<style>
+  .chip {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 13px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .chip-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 10px;
+  }
+  .chip-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-stem { background: var(--blue); }
+  .dot-language { background: var(--gold); }
+  .dot-humanities { background: var(--green); }
+  .chip-count {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--ink-35);
+  }
+  .chip-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+</style>

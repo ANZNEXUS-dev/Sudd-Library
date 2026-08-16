@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 900">
+  <rect width="1160" height="900" fill="#10201C"/>
+  <defs>
+    <linearGradient id="teal1" x1="376" y1="155" x2="583" y2="335"><stop stop-color="#3FC7AC"/><stop offset="1" stop-color="#1B7A68"/></linearGradient>
+    <linearGradient id="teal2" x1="790" y1="155" x2="583" y2="335"><stop stop-color="#3FC7AC"/><stop offset="1" stop-color="#1B7A68"/></linearGradient>
+    <linearGradient id="gold1" x1="583" y1="410" x2="583" y2="628"><stop stop-color="#E8C24C"/><stop offset="1" stop-color="#B08A1E"/></linearGradient>
+  </defs>
+  <path d="M376 155 L583 335" stroke="url(#teal1)" stroke-width="42" stroke-linecap="round"/>
+  <path d="M790 155 L583 335" stroke="url(#teal2)" stroke-width="42" stroke-linecap="round"/>
+  <path d="M583 350 L583 628" stroke="url(#gold1)" stroke-width="42" stroke-linecap="round"/>
+  <circle cx="583" cy="335" r="38" fill="#fff"/>
+  <text x="580" y="740" font-family="Space Grotesk, Arial, sans-serif" font-weight="700" font-size="86" fill="#fff" text-anchor="middle" letter-spacing="4">ANZ NEXUS</text>
+</svg>

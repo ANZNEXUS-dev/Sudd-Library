@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import ResourceTicket from '../../../../components/ResourceTicket.astro';
+import EmptyState from '../../../../components/EmptyState.astro';
+import { CURRICULUM, RESOURCE_TYPE_LABELS, RESOURCE_TYPE_ORDER } from '../../../../data/curriculum';
+import type { ResourceType } from '../../../../data/curriculum';
+import { getCollection } from 'astro:content';
+
+export function getStaticPaths() {
+  return CURRICULUM.flatMap((level) =>
+    level.classes.flatMap((cls) =>
+      cls.subjects.map((subject) => ({
+        params: { level: level.slug, classSlug: cls.slug, subjectSlug: subject.slug },
+        props: { level, cls, subject },
+      }))
+    )
+  );
+}
+
+const { level, cls, subject } = Astro.props;
+const allResources = await getCollection('resources');
+const matching = allResources.filter(
+  (r) =>
+    r.data.level === level.slug &&
+    r.data.classSlug === cls.slug &&
+    r.data.subjectSlug === subject.slug
+);
+
+const byType: Record<ResourceType, typeof matching> = {
+  notes: matching.filter((r) => r.data.type === 'notes'),
+  schemes: matching.filter((r) => r.data.type === 'schemes'),
+  'past-papers': matching.filter((r) => r.data.type === 'past-papers'),
+};
+---
+<BaseLayout title={`${subject.name} — ${cls.name}`}>
+  <Breadcrumb
+    items={[
+      { label: 'Home', href: '/' },
+      { label: level.name, href: `/${level.slug}/` },
+      { label: cls.name, href: `/${level.slug}/${cls.slug}/` },
+      { label: subject.name },
+    ]}
+  />
+  <section class="wrap">
+    <h1 class="page-h1">{subject.name}</h1>
+    <p class="page-sub">{cls.name} · {matching.length} file{matching.length === 1 ? '' : 's'}</p>
+
+    <div class="tabs" role="tablist">
+      {RESOURCE_TYPE_ORDER.map((type, i) => (
+        <button class="tab" data-tab={type} aria-selected={i === 0 ? 'true' : 'false'} role="tab">
+          {RESOURCE_TYPE_LABELS[type]}
+        </button>
+      ))}
+    </div>
+
+    {RESOURCE_TYPE_ORDER.map((type, i) => (
+      <div class="tab-panel" data-panel={type} style={i === 0 ? '' : 'display:none;'}>
+        {byType[type].length > 0 ? (
+          <div class="ticket-list">
+            {byType[type].map((r) => (
+              <ResourceTicket
+                title={r.data.title}
+                examBoard={r.data.examBoard}
+                year={r.data.year}
+                fileUrl={r.data.fileUrl}
+                fileSize={r.data.fileSize}
+                markingSchemeUrl={r.data.markingSchemeUrl}
+                markingSchemeSize={r.data.markingSchemeSize}
+              />
+            ))}
+          </div>
+        ) : (
+          <EmptyState message={`No ${RESOURCE_TYPE_LABELS[type].toLowerCase()} uploaded here yet.`} />
+        )}
+      </div>
+    ))}
+  </section>
+</BaseLayout>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.tab');
+  const panels = document.querySelectorAll<HTMLDivElement>('.tab-panel');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => t.setAttribute('aria-selected', 'false'));
+      tab.setAttribute('aria-selected', 'true');
+      const target = tab.dataset.tab;
+      panels.forEach((p) => {
+        p.style.display = p.dataset.panel === target ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+<style>
+  .page-h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 24px;
+    margin: 10px 0 2px;
+  }
+  .page-sub { font-size: 13px; color: var(--ink-60); margin: 0 0 16px; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .tab {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--white);
+    color: var(--ink-60);
+    cursor: pointer;
+  }
+  .tab[aria-selected='true'] {
+    background: var(--deep);
+    border-color: var(--deep);
+    color: var(--paper);
+  }
+  .ticket-list { display: flex; flex-direction: column; gap: 12px; padding-bottom: 24px; }
+</style>

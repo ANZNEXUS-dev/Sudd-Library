@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import SubjectChip from '../../../components/SubjectChip.astro';
+import { CURRICULUM } from '../../../data/curriculum';
+import { getCollection } from 'astro:content';
+
+export function getStaticPaths() {
+  return CURRICULUM.flatMap((level) =>
+    level.classes.map((cls) => ({
+      params: { level: level.slug, classSlug: cls.slug },
+      props: { level, cls },
+    }))
+  );
+}
+
+const { level, cls } = Astro.props;
+const allResources = await getCollection('resources');
+
+function countFor(subjectSlug: string) {
+  return allResources.filter(
+    (r) => r.data.level === level.slug && r.data.classSlug === cls.slug && r.data.subjectSlug === subjectSlug
+  ).length;
+}
+---
+<BaseLayout title={`${cls.name} — ${level.name}`}>
+  <Breadcrumb
+    items={[
+      { label: 'Home', href: '/' },
+      { label: level.name, href: `/${level.slug}/` },
+      { label: cls.name },
+    ]}
+  />
+  <section class="wrap">
+    <p class="section-title" style="margin-top:10px;">{level.name}</p>
+    <h1 class="page-h1">{cls.name}</h1>
+    <p class="page-sub">
+      {cls.subjects.length} subjects
+      {cls.examLabel && cls.examBody ? ` · ${cls.examLabel} administered by ${cls.examBody}` : ''}
+    </p>
+    <div class="legend">
+      <span><span class="dot dot-stem"></span>STEM</span>
+      <span><span class="dot dot-language"></span>Languages</span>
+      <span><span class="dot dot-humanities"></span>Humanities</span>
+    </div>
+    <div class="chip-grid">
+      {cls.subjects.map((s) => (
+        <SubjectChip
+          name={s.name}
+          group={s.group}
+          href={`/${level.slug}/${cls.slug}/${s.slug}/`}
+          count={countFor(s.slug)}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 26px;
+    margin: 4px 0 4px;
+  }
+  .page-sub { font-size: 13px; color: var(--ink-60); margin: 0 0 14px; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+  .legend span {
+    display: flex; align-items: center; gap: 5px;
+    font-family: var(--font-mono); font-size: 10px; color: var(--ink-60);
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot-stem { background: var(--blue); }
+  .dot-language { background: var(--gold); }
+  .dot-humanities { background: var(--green); }
+  .chip-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding-bottom: 24px;
+  }
+</style>

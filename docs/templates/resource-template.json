@@ -1,0 +1,14 @@
+{
+  "level": "REPLACE_WITH_primary_OR_secondary_OR_aes",
+  "classSlug": "REPLACE_WITH_p8_OR_s4_ETC",
+  "subjectSlug": "REPLACE_WITH_SUBJECT_SLUG",
+  "type": "REPLACE_WITH_notes_OR_schemes_OR_past-papers_OR_holiday-packages",
+  "title": "REPLACE_WITH_DISPLAY_TITLE",
+  "examBoard": "OPTIONAL_e.g._SSNEC",
+  "year": 0,
+  "fileUrl": "REPLACE_WITH_DIRECT_FILE_URL",
+  "fileSize": "REPLACE_WITH_e.g._1.1 MB",
+  "markingSchemeUrl": "OPTIONAL_DIRECT_URL_TO_MARKING_SCHEME",
+  "markingSchemeSize": "OPTIONAL_e.g._400 KB",
+  "dateAdded": "REPLACE_WITH_YYYY-MM-DD"
+}

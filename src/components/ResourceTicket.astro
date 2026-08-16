@@ -1,0 +1,132 @@
+---
+interface Props {
+  title: string;
+  examBoard?: string;
+  year?: number;
+  fileUrl: string;
+  fileSize: string;
+  markingSchemeUrl?: string;
+  markingSchemeSize?: string;
+}
+const { title, examBoard, year, fileUrl, fileSize, markingSchemeUrl, markingSchemeSize } = Astro.props as Props;
+const meta = [examBoard, year].filter(Boolean).join(' · ');
+---
+<div class="ticket">
+  <div class="ticket-stub">
+    <div class="seal">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <path d="M20 6L9 17l-5-5" />
+      </svg>
+    </div>
+  </div>
+  <div class="perf"></div>
+  <div class="ticket-body">
+    <div class="ticket-title">{title}</div>
+    {meta && <div class="ticket-meta">{meta}</div>}
+    <div class="ticket-footer">
+      <span class="ticket-size">PDF · {fileSize}</span>
+      <div class="dl-group">
+        {markingSchemeUrl && (
+          <a class="dl-btn dl-btn--ghost" href={markingSchemeUrl} download target="_blank" rel="noopener">
+            Marking Scheme
+          </a>
+        )}
+        <a class="dl-btn" href={fileUrl} download target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M12 3v13m0 0l-5-5m5 5l5-5M5 21h14" />
+          </svg>
+          Download
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ticket {
+    display: flex;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .ticket-stub {
+    width: 60px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper-2);
+  }
+  .seal {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-9deg);
+    border: 2px dashed rgba(16, 24, 42, 0.3);
+  }
+  .perf { width: 0; border-left: 2px dashed var(--line); }
+  .ticket-body {
+    flex: 1;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+  .ticket-title {
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .ticket-meta {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ink-35);
+  }
+  .ticket-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .ticket-size {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ink-60);
+    flex-shrink: 0;
+  }
+  .dl-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-left: auto;
+  }
+  .dl-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--deep-hover);
+    color: var(--white);
+    font-weight: 500;
+    font-size: 11.5px;
+    padding: 7px 12px;
+    border-radius: 9px;
+    flex-shrink: 0;
+  }
+  .dl-btn:hover { background: var(--deep); }
+  .dl-btn--ghost {
+    background: none;
+    color: var(--deep-hover);
+    border: 1px solid var(--line);
+  }
+  .dl-btn--ghost:hover { background: var(--paper-2); }
+</style>

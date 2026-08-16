@@ -1,0 +1,82 @@
+---
+import { SITE } from '../data/site';
+---
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="/" class="brand" aria-label={`${SITE.name} — home`}>
+      <svg width="26" height="26" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50,44 L50,80 C42,73 28,70 17,72 L17,42 C29,40 42,40 50,44 Z" fill="#0F4788" />
+        <path d="M50,44 L50,80 C58,73 72,70 83,72 L83,42 C71,40 58,40 50,44 Z" fill="#0F4788" />
+        <path d="M23,50 C31,48 40,49 46,52" stroke="#4E7BAE" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <path d="M23,59 C31,57 40,58 46,61" stroke="#4E7BAE" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <path d="M77,50 C69,48 60,49 54,52" stroke="#4E7BAE" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <path d="M77,59 C69,57 60,58 54,61" stroke="#4E7BAE" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <path d="M50,44 L50,80" stroke="#F2C411" stroke-width="2" stroke-linecap="round" />
+        <path d="M42,80 L50,90 L50,80 Z" fill="#CA2820" />
+        <path d="M58,80 L50,90 L50,80 Z" fill="#148540" />
+        <polygon points="50.0,8.0 53.64,18.98 65.22,19.06 55.9,25.92 59.4,36.94 50.0,30.2 40.6,36.94 44.1,25.92 34.78,19.06 46.36,18.98" fill="#F2C411" />
+      </svg>
+      <span class="wordmark">{SITE.name}</span>
+    </a>
+    <form class="search-form" action="/search/" method="get">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" />
+      </svg>
+      <input type="text" name="q" placeholder="Search resources" aria-label="Search resources" />
+    </form>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 18px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-shrink: 0;
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .search-form {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--white);
+    border: 1.5px solid var(--deep);
+    border-radius: 12px;
+    padding: 8px 12px;
+    flex: 1;
+    min-width: 180px;
+    max-width: 340px;
+    margin-left: auto;
+    color: var(--ink-60);
+  }
+  .search-form input {
+    border: none;
+    outline: none;
+    background: none;
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    color: var(--ink);
+    width: 100%;
+  }
+  .search-form input::placeholder { color: var(--ink-35); }
+</style>

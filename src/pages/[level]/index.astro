@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { CURRICULUM } from '../../data/curriculum';
+
+export function getStaticPaths() {
+  return CURRICULUM.map((level) => ({
+    params: { level: level.slug },
+    props: { level },
+  }));
+}
+
+const { level } = Astro.props;
+---
+<BaseLayout title={level.name} description={level.description}>
+  <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: level.name }]} />
+  <section class="wrap">
+    <h1 class="page-h1">{level.name}</h1>
+    <p class="page-sub">{level.description}</p>
+    <div class="class-grid">
+      {level.classes.map((c) => (
+        <a class="class-card" href={`/${level.slug}/${c.slug}/`}>
+          <span class="class-name">{c.name}</span>
+          <span class="class-sub">
+            {c.subjects.length} subject{c.subjects.length === 1 ? '' : 's'}
+            {c.examLabel ? ` · ${c.examLabel}` : ''}
+          </span>
+          <span class="class-arrow" aria-hidden="true">›</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 26px;
+    margin: 10px 0 4px;
+  }
+  .page-sub { font-size: 13px; color: var(--ink-60); margin: 0 0 18px; }
+  .class-grid { display: flex; flex-direction: column; gap: 10px; padding-bottom: 24px; }
+  .class-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 16px;
+  }
+  .class-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .class-sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-35);
+    margin-left: 6px;
+  }
+  .class-arrow { margin-left: auto; color: var(--ink-35); font-size: 18px; }
+</style>

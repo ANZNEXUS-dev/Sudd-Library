@@ -1,0 +1,12 @@
+{
+  "name": "Sudd Library",
+  "short_name": "Sudd Library",
+  "description": "Lesson notes, schemes of work, past papers, and holiday packages for South Sudanese schools.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F4788",
+  "theme_color": "#0F4788",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

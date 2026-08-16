@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LevelCard from '../components/LevelCard.astro';
+import { CURRICULUM } from '../data/curriculum';
+import { SITE } from '../data/site';
+import { getCollection } from 'astro:content';
+
+const allResources = await getCollection('resources');
+const recent = [...allResources]
+  .sort((a, b) => b.data.dateAdded.valueOf() - a.data.dateAdded.valueOf())
+  .slice(0, 5);
+
+const iconFor = { primary: 'primary', secondary: 'secondary', aes: 'aes' } as const;
+---
+<BaseLayout title={SITE.name} description={SITE.tagline}>
+  <section class="hero wrap">
+    <h1>{SITE.tagline}</h1>
+    <p class="hero-sub">{SITE.description}</p>
+    <div class="reassure">
+      <span><span class="dot"></span>Works offline</span>
+      <span><span class="dot"></span>No login</span>
+      <span><span class="dot"></span>Free forever</span>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <p class="section-title">Choose a level</p>
+    <div class="level-grid">
+      {CURRICULUM.map((level) => (
+        <LevelCard
+          name={level.name}
+          description={level.description}
+          href={`/${level.slug}/`}
+          icon={iconFor[level.slug]}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap">
+    <p class="section-title">Recently added</p>
+    {recent.length > 0 ? (
+      <div class="recent-list">
+        {recent.map((r) => (
+          <div class="recent-row">
+            <span class="recent-tag">{r.data.classSlug.toUpperCase()}</span>
+            <span class="recent-text">{r.data.title}</span>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p class="empty-note">Nothing uploaded yet — new resources will show up here as they're added.</p>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { padding: 26px 18px 10px; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(24px, 5vw, 30px);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: var(--ink-60);
+    line-height: 1.55;
+    margin: 0 0 14px;
+    max-width: 46ch;
+  }
+  .reassure {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-60);
+  }
+  .reassure span { display: flex; align-items: center; gap: 6px; }
+  .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
+  .level-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+  .recent-list { display: flex; flex-direction: column; }
+  .recent-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .recent-row:last-child { border-bottom: none; }
+  .recent-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--white);
+    background: var(--deep-hover);
+    padding: 3px 7px;
+    border-radius: 5px;
+    flex-shrink: 0;
+  }
+  .recent-text { font-size: 13px; color: var(--ink); }
+  .empty-note {
+    font-size: 12.5px;
+    color: var(--ink-60);
+    line-height: 1.5;
+  }
+</style>
