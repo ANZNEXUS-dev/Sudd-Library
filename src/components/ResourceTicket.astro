@@ -4,7 +4,7 @@ interface Props {
   examBoard?: string;
   year?: number;
   fileUrl: string;
-  fileSize: string;
+  fileSize?: string;
   markingSchemeUrl?: string;
   markingSchemeSize?: string;
 }
@@ -24,13 +24,16 @@ const meta = [examBoard, year].filter(Boolean).join(' · ');
     <div class="ticket-title">{title}</div>
     {meta && <div class="ticket-meta">{meta}</div>}
     <div class="ticket-footer">
-      <span class="ticket-size">PDF · {fileSize}</span>
+      <span class="ticket-size">PDF{fileSize ? ` · ${fileSize}` : ''}</span>
       <div class="dl-group">
         {markingSchemeUrl && (
-          <a class="dl-btn dl-btn--ghost" href={markingSchemeUrl} download target="_blank" rel="noopener">
+          <a class="dl-btn dl-btn--ghost" href={markingSchemeUrl} target="_blank" rel="noopener">
             Marking Scheme
           </a>
         )}
+        <a class="dl-btn dl-btn--ghost" href={fileUrl} target="_blank" rel="noopener">
+          View
+        </a>
         <a class="dl-btn" href={fileUrl} download target="_blank" rel="noopener">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <path d="M12 3v13m0 0l-5-5m5 5l5-5M5 21h14" />
@@ -113,6 +116,7 @@ const meta = [examBoard, year].filter(Boolean).join(' · ');
   .dl-btn {
     display: flex;
     align-items: center;
+    min-height: 40px;
     gap: 6px;
     background: var(--deep-hover);
     color: var(--white);

@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { Content } from '../../../DISCLAIMER.md';
+---
+<BaseLayout title="Disclaimer" description="Terms of use, non-affiliation, and takedown policy for Sudd Library.">
+  <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Disclaimer' }]} />
+  <section class="wrap disclaimer-body">
+    <Content />
+  </section>
+</BaseLayout>
+
+<style>
+  .disclaimer-body {
+    padding: 18px 18px 40px;
+    line-height: 1.65;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .disclaimer-body :global(h1) {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    margin: 8px 0 18px;
+  }
+  .disclaimer-body :global(h3) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    margin: 24px 0 8px;
+  }
+  .disclaimer-body :global(ul) { padding-left: 20px; }
+  .disclaimer-body :global(a) { color: var(--deep-hover); text-decoration: underline; }
+</style>

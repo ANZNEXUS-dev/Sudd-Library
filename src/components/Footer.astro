@@ -15,12 +15,14 @@ const waContact = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Hi,
       <span class="footer-word">{SITE.org}</span>
     </div>
     <nav class="footer-links">
-      <a href={SITE.repoUrl} target="_blank" rel="noopener">GitHub ↗</a>
-      <a href={`${SITE.repoUrl}/blob/main/DISCLAIMER.md`} target="_blank" rel="noopener">Disclaimer</a>
+      <a href={waContact} target="_blank" rel="noopener" class="footer-links__primary">Contact</a>
       <a href={waReport} target="_blank" rel="noopener">Report a broken link</a>
-      <a href={waContact} target="_blank" rel="noopener">Contact</a>
+      <a href="/disclaimer/">Disclaimer</a>
+      <a href="/about/">About</a>
     </nav>
-    <p class="footer-fine">Site by {SITE.org} · Open source · © {new Date().getFullYear()}</p>
+    <p class="footer-fine">
+      Site by {SITE.org} · Open source (<a href={SITE.repoUrl} target="_blank" rel="noopener">GitHub</a>) · © {new Date().getFullYear()}
+    </p>
   </div>
 </footer>
 
@@ -58,6 +60,16 @@ const waContact = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Hi,
     color: rgba(241, 245, 242, 0.55);
   }
   .footer-links a:hover { color: var(--white); }
+  .footer-links__primary {
+    color: #7FE0AA;
+    font-weight: 500;
+  }
+  .footer-links__primary:hover { color: #A3ECC4; }
+  .footer-fine a {
+    color: rgba(241, 245, 242, 0.45);
+    text-decoration: underline;
+  }
+  .footer-fine a:hover { color: var(--white); }
   .footer-fine {
     font-family: var(--font-mono);
     font-size: 9.5px;

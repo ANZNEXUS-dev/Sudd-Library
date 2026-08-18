@@ -28,6 +28,7 @@ const matching = allResources.filter(
 );
 
 const byType: Record<ResourceType, typeof matching> = {
+  textbooks: matching.filter((r) => r.data.type === 'textbooks'),
   notes: matching.filter((r) => r.data.type === 'notes'),
   schemes: matching.filter((r) => r.data.type === 'schemes'),
   'past-papers': matching.filter((r) => r.data.type === 'past-papers'),
@@ -107,6 +108,9 @@ const byType: Record<ResourceType, typeof matching> = {
     font-family: var(--font-mono);
     font-size: 11.5px;
     padding: 8px 13px;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
     border-radius: 999px;
     border: 1px solid var(--line);
     background: var(--white);

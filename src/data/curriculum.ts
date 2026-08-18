@@ -1,5 +1,5 @@
 export type SubjectGroup = 'stem' | 'language' | 'humanities';
-export type ResourceType = 'notes' | 'schemes' | 'past-papers' | 'holiday-packages';
+export type ResourceType = 'notes' | 'schemes' | 'past-papers' | 'holiday-packages' | 'textbooks';
 
 export interface Subject {
   slug: string;
@@ -28,9 +28,10 @@ export const RESOURCE_TYPE_LABELS: Record<ResourceType, string> = {
   schemes: 'Schemes of Work',
   'past-papers': 'Past Papers',
   'holiday-packages': 'Holiday Packages',
+  textbooks: 'Textbooks',
 };
 
-export const RESOURCE_TYPE_ORDER: ResourceType[] = ['notes', 'schemes', 'past-papers', 'holiday-packages'];
+export const RESOURCE_TYPE_ORDER: ResourceType[] = ['textbooks', 'notes', 'schemes', 'past-papers', 'holiday-packages'];
 
 const primarySubjects: Subject[] = [
   { slug: 'mathematics', name: 'Mathematics', group: 'stem' },

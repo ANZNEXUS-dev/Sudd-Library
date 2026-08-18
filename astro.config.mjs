@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  // Replace with the real domain once one is attached to the Cloudflare Pages project.
-  site: 'https://suddlibrary.org',
+  // Update this if a custom domain is attached later — OG tags and canonical URLs read from this.
+  site: 'https://sudd-library.anznexus.workers.dev',
   output: 'static',
 });

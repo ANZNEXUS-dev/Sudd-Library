@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import { SITE } from '../data/site';
 import '../styles/global.css';
 
@@ -10,6 +11,8 @@ interface Props {
 }
 const { title, description = SITE.description } = Astro.props as Props;
 const pageTitle = title === SITE.name ? SITE.name : `${title} — ${SITE.name}`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageUrl = new URL('/og-banner.png', Astro.site).toString();
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +24,13 @@ const pageTitle = title === SITE.name ? SITE.name : `${title} — ${SITE.name}`;
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#0F4788" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <Header />
@@ -28,6 +38,7 @@ const pageTitle = title === SITE.name ? SITE.name : `${title} — ${SITE.name}`;
       <slot />
     </main>
     <Footer />
+    <WhatsAppFloat />
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {

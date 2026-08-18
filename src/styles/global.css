@@ -13,7 +13,7 @@
   --paper-2: #e9eef5;
   --ink: #10182a;
   --ink-60: rgba(16, 24, 42, 0.6);
-  --ink-35: rgba(16, 24, 42, 0.35);
+  --ink-35: rgba(16, 24, 42, 0.6); /* was 0.35 — raised for AA contrast (measured 2.2:1 → 4.5:1) */
   --line: rgba(16, 24, 42, 0.12);
   --white: #ffffff;
 

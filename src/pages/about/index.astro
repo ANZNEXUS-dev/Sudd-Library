@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { SITE } from '../../data/site';
+---
+<BaseLayout title="About" description="What Sudd Library is and how it works.">
+  <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
+  <section class="wrap about-body">
+    <h1>About {SITE.name}</h1>
+    <p>
+      {SITE.name} is a free, open-access library of official textbooks, past papers,
+      schemes of work, and lesson notes for South Sudanese schools — Primary, Secondary,
+      and AES. No accounts, no login, no cost.
+    </p>
+    <p>
+      Textbooks link directly to South Sudan's National Curriculum Development Center
+      (NCDC). Past papers, notes, and other materials are added directly by {SITE.org}
+      and, over time, by teachers who share what they have.
+    </p>
+    <p>
+      Found a broken link or have something to contribute? Use the WhatsApp link in the
+      footer — every message gets read.
+    </p>
+    <p>
+      See the <a href="/disclaimer/">disclaimer</a> for terms of use and how to request
+      a takedown.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-body {
+    padding: 18px 18px 40px;
+    max-width: 60ch;
+  }
+  .about-body h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    margin: 8px 0 16px;
+  }
+  .about-body p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+  .about-body a { color: var(--deep-hover); text-decoration: underline; }
+</style>

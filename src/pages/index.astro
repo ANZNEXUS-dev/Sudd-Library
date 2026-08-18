@@ -1,14 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LevelCard from '../components/LevelCard.astro';
-import { CURRICULUM } from '../data/curriculum';
+import { CURRICULUM, RESOURCE_TYPE_LABELS, getSubject } from '../data/curriculum';
 import { SITE } from '../data/site';
 import { getCollection } from 'astro:content';
 
 const allResources = await getCollection('resources');
 const recent = [...allResources]
   .sort((a, b) => b.data.dateAdded.valueOf() - a.data.dateAdded.valueOf())
-  .slice(0, 5);
+  .slice(0, 6);
 
 const iconFor = { primary: 'primary', secondary: 'secondary', aes: 'aes' } as const;
 ---
@@ -19,7 +19,7 @@ const iconFor = { primary: 'primary', secondary: 'secondary', aes: 'aes' } as co
     <div class="reassure">
       <span><span class="dot"></span>Works offline</span>
       <span><span class="dot"></span>No login</span>
-      <span><span class="dot"></span>Free forever</span>
+      <span><span class="dot"></span>Free to access</span>
     </div>
   </section>
 
@@ -41,12 +41,19 @@ const iconFor = { primary: 'primary', secondary: 'secondary', aes: 'aes' } as co
     <p class="section-title">Recently added</p>
     {recent.length > 0 ? (
       <div class="recent-list">
-        {recent.map((r) => (
-          <div class="recent-row">
-            <span class="recent-tag">{r.data.classSlug.toUpperCase()}</span>
-            <span class="recent-text">{r.data.title}</span>
-          </div>
-        ))}
+        {recent.map((r) => {
+          const subject = getSubject(r.data.level, r.data.classSlug, r.data.subjectSlug);
+          const subline = [subject?.name, RESOURCE_TYPE_LABELS[r.data.type]].filter(Boolean).join(' · ');
+          return (
+            <a class="recent-row" href={`/${r.data.level}/${r.data.classSlug}/${r.data.subjectSlug}/`}>
+              <span class="recent-tag">{r.data.classSlug.toUpperCase()}</span>
+              <span class="recent-text-group">
+                <span class="recent-text">{r.data.title}</span>
+                {subline && <span class="recent-subline">{subline}</span>}
+              </span>
+            </a>
+          );
+        })}
       </div>
     ) : (
       <p class="empty-note">Nothing uploaded yet — new resources will show up here as they're added.</p>
@@ -85,7 +92,7 @@ const iconFor = { primary: 'primary', secondary: 'secondary', aes: 'aes' } as co
   .recent-list { display: flex; flex-direction: column; }
   .recent-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
     padding: 11px 0;
     border-bottom: 1px solid var(--line);
@@ -99,8 +106,19 @@ const iconFor = { primary: 'primary', secondary: 'secondary', aes: 'aes' } as co
     padding: 3px 7px;
     border-radius: 5px;
     flex-shrink: 0;
+    margin-top: 2px;
   }
-  .recent-text { font-size: 13px; color: var(--ink); }
+  .recent-text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .recent-text { font-size: 13px; color: var(--ink); line-height: 1.4; }
+  .recent-subline {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ink-60);
+  }
   .empty-note {
     font-size: 12.5px;
     color: var(--ink-60);
