@@ -2,7 +2,7 @@ backend:
   name: github
   repo: ANZNEXUS-dev/sudd-library
   branch: main
-  base_url: https://YOUR-WORKER-SUBDOMAIN.workers.dev
+  base_url: https://sudd-library-auth.anznexus.workers.dev
   auth_endpoint: auth
 
 media_folder: "public/uploads"
