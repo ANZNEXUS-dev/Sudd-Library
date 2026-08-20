@@ -24,7 +24,7 @@ const ogImageUrl = new URL('/og-banner.png', Astro.site).toString();
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#0F4788" />
-
+<link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={pageTitle} />
