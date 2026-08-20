@@ -22,10 +22,30 @@ const waFloat = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Hi, I
     justify-content: center;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
     z-index: 40;
+    opacity: 1;
+    transition: opacity 0.2s ease;
   }
   .wa-float:hover { background: #1FB855; }
+  .wa-float.wa-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
 
   @media print {
     .wa-float { display: none; }
   }
 </style>
+
+<script>
+  const waButton = document.querySelector('.wa-float');
+  const footer = document.querySelector('footer.site-footer');
+  if (waButton && footer) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        waButton.classList.toggle('wa-hidden', entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(footer);
+  }
+</script>
