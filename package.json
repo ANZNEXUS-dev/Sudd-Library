@@ -10,6 +10,7 @@
     "sync": "astro sync"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.2.0"
   },
   "devDependencies": {
