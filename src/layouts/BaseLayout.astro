@@ -13,6 +13,7 @@ const { title, description = SITE.description } = Astro.props as Props;
 const pageTitle = title === SITE.name ? SITE.name : `${title} — ${SITE.name}`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImageUrl = new URL('/og-banner.png', Astro.site).toString();
+const isHome = Astro.url.pathname === '/';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +34,14 @@ const ogImageUrl = new URL('/og-banner.png', Astro.site).toString();
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
+    {isHome && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Sudd Library",
+        "url": Astro.site
+      })} />
+    )}
   </head>
   <body>
     <Header />
