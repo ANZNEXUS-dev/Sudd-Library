@@ -7,5 +7,5 @@ export const SITE = {
   org: 'ANZ NEXUS',
   repoUrl: 'https://github.com/ANZNEXUS-dev/sudd-library',
   contactEmail: 'anznexus00@gmail.com',
-  whatsapp: '211924480992', // digits only, no + or leading 0
+  whatsapp: '211925229833', // digits only, no + or leading 0
 };
