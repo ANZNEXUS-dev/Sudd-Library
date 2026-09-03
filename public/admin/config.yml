@@ -4,7 +4,9 @@ backend:
   branch: main
   base_url: https://sudd-library-auth.anznexus.workers.dev
   auth_endpoint: auth
-
+  
+media_folder: "public/uploads"
+public_folder: "/uploads"
 media_library:
   name: r2
 
