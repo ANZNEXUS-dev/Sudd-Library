@@ -15,7 +15,7 @@ collections:
     create: true
     format: "json"
     slug: "{{fields.level}}-{{fields.classSlug}}-{{fields.subjectSlug}}-{{fields.type}}-{{fields.title}}"
-    fields:
+        fields:
       - { label: "Level", name: "level", widget: "select", options: ["primary", "secondary", "aes"] }
       - { label: "Class Slug", name: "classSlug", widget: "string", hint: "e.g. p1, s4, alp — see src/data/curriculum.ts for the full list" }
       - { label: "Subject Slug", name: "subjectSlug", widget: "string", hint: "e.g. mathematics, cre — see src/data/curriculum.ts" }
@@ -31,7 +31,7 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Exam Board", name: "examBoard", widget: "string", required: false }
       - { label: "Year", name: "year", widget: "number", value_type: "int", required: false }
-    - { label: "File URL", name: "fileUrl", widget: "file", hint: "Upload the PDF, or leave as a direct link" }
+      - { label: "File URL", name: "fileUrl", widget: "file", hint: "Upload the PDF, or leave as a direct link" }
       - { label: "File Size", name: "fileSize", widget: "string", required: false, hint: "e.g. 1.1 MB" }
       - { label: "Marking Scheme URL", name: "markingSchemeUrl", widget: "string", required: false }
       - { label: "Marking Scheme Size", name: "markingSchemeSize", widget: "string", required: false }
