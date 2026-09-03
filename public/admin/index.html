@@ -1,11 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sudd Library — Content Admin</title>
-</head>
-<body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-</body>
-</html> 
+CMS.registerMediaLibrary('r2', {
+  name: 'r2',
+  handleUpload: async (file) => {
+    const token = window.localStorage.getItem('netlify-cms-user')
+      ? JSON.parse(window.localStorage.getItem('netlify-cms-user')).token
+      : null;
+
+    if (!token) throw new Error('Not authenticated');
+
+    const presignResp = await fetch('https://sudd-library-auth.anznexus.workers.dev/media/presign', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ filename: file.name, contentType: file.type }),
+    });
+
+    if (!presignResp.ok) throw new Error('Failed to get upload URL');
+    const { uploadUrl, publicUrl } = await presignResp.json();
+
+    const uploadResp = await fetch(uploadUrl, {
+      method: 'PUT',
+      headers: { 'Content-Type': file.type },
+      body: file,
+    });
+
+    if (!uploadResp.ok) throw new Error('Upload to R2 failed');
+
+    return { url: publicUrl };
+  },
+});
