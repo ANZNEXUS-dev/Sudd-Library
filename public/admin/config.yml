@@ -9,7 +9,7 @@ media_library:
   name: r2
 
 collections:
-    name: "resources"
+  - name: "resources"
     label: "Resources"
     folder: "src/content/resources"
     create: true
