@@ -15,7 +15,8 @@ collections:
     create: true
     format: "json"
     slug: "{{fields.level}}-{{fields.classSlug}}-{{fields.subjectSlug}}-{{fields.type}}-{{fields.title}}"
-        fields:
+    
+    fields:
       - { label: "Level", name: "level", widget: "select", options: ["primary", "secondary", "aes"] }
       - { label: "Class Slug", name: "classSlug", widget: "string", hint: "e.g. p1, s4, alp — see src/data/curriculum.ts for the full list" }
       - { label: "Subject Slug", name: "subjectSlug", widget: "string", hint: "e.g. mathematics, cre — see src/data/curriculum.ts" }
