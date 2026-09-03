@@ -10,10 +10,10 @@ media_library:
 
 collections:
   - name: "resources"
-    label: "Resources"
-    folder: "src/content/resources"
-    create: true
-    format: "json"
+  - label: "Resources"
+  - folder: "src/content/resources"
+  - create: true
+  - format: "json"
     slug: "{{fields.level}}-{{fields.classSlug}}-{{fields.subjectSlug}}-{{fields.type}}-{{fields.title}}"
     
     fields:
