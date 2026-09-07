@@ -41,3 +41,7 @@ Code is intended to be licensed under AGPLv3 (see `LICENSE` — pending
 final text). Uploaded PDF resources retain whatever rights their original
 authors or issuing bodies hold. The project name and logos are reserved
 separately — see `NOTICE.md`.
+
+## Content Admin
+
+Edit content through Decap CMS at `/admin/`.
