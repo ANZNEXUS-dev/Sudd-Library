@@ -7,4 +7,5 @@
   Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://avatars.githubusercontent.com; script-src 'self' 'unsafe-inline' https://unpkg.com; connect-src 'self' https://sudd-library-auth.anznexus.workers.dev https://api.github.com https://*.r2.cloudflarestorage.com https://uploads.github.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
 
 /admin/*
+  ! Content-Security-Policy
   Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline' https://unpkg.com; font-src 'self' data:; img-src 'self' data: https://avatars.githubusercontent.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; connect-src 'self' https://unpkg.com https://sudd-library-auth.anznexus.workers.dev https://api.github.com https://*.r2.cloudflarestorage.com https://uploads.github.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
