@@ -2,6 +2,7 @@
 // visited, so a teacher who already opened a page can reopen it without
 // data. It does not need to handle PDFs specially — once a file is
 // downloaded through the browser, it already lives on the device.
+
 const CACHE_NAME = 'sudd-library-v1';
 
 self.addEventListener('install', (event) => {
@@ -19,9 +20,13 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
+
   if (request.method !== 'GET') return;
+
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+
+  if (url.pathname.startsWith('/admin')) return;
 
   event.respondWith(
     fetch(request)
@@ -30,6 +35,8 @@ self.addEventListener('fetch', (event) => {
         caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
         return response;
       })
-      .catch(() => caches.match(request))
+      .catch(() =>
+        caches.match(request).then((cached) => cached || new Response('Offline', { status: 503 }))
+      )
   );
 });
