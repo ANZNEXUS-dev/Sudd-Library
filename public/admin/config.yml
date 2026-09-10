@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: ANZNEXUS-dev/sudd-library
+  repo: ANZNEXUS-dev/Sudd-Library
   branch: main
   base_url: https://sudd-library-auth.anznexus.workers.dev
   auth_endpoint: auth
