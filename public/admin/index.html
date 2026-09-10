@@ -8,44 +8,40 @@
 </head>
 <body>
   <div id="nc-root"></div>
-  <script>
-    window.CMS_MANUAL_INIT = true;
-  </script>
+
+  <script>window.CMS_MANUAL_INIT = true;</script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-  CMS.registerMediaLibrary('r2', {
-    name: 'r2',
-    handleUpload: async (file) => {
-      const userData = window.localStorage.getItem('netlify-cms-user');
-      const token = userData ? JSON.parse(userData).token : null;
+    CMS.registerMediaLibrary('r2', {
+      name: 'r2',
+      handleUpload: async (file) => {
+        const userData = window.localStorage.getItem('netlify-cms-user');
+        const token = userData ? JSON.parse(userData).token : null;
+        if (!token) throw new Error('Not authenticated');
 
-      if (!token) throw new Error('Not authenticated');
+        const presignResp = await fetch('https://sudd-library-auth.anznexus.workers.dev/media/presign', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ filename: file.name, contentType: file.type }),
+        });
+        if (!presignResp.ok) throw new Error('Failed to get upload URL');
 
-      const presignResp = await fetch('https://sudd-library-auth.anznexus.workers.dev/media/presign', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ filename: file.name, contentType: file.type }),
-      });
+        const { uploadUrl, publicUrl } = await presignResp.json();
+        const uploadResp = await fetch(uploadUrl, {
+          method: 'PUT',
+          headers: { 'Content-Type': file.type },
+          body: file,
+        });
+        if (!uploadResp.ok) throw new Error('Upload to R2 failed');
 
-      if (!presignResp.ok) throw new Error('Failed to get upload URL');
-      const { uploadUrl, publicUrl } = await presignResp.json();
+        return { url: publicUrl };
+      },
+    });
 
-      const uploadResp = await fetch(uploadUrl, {
-        method: 'PUT',
-        headers: { 'Content-Type': file.type },
-        body: file,
-      });
-
-      if (!uploadResp.ok) throw new Error('Upload to R2 failed');
-
-      return { url: publicUrl };
-    },
-  });
-
-  CMS.init();
+    CMS.init();
   </script>
 </body>
 </html>
