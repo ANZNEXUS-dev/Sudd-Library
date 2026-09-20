@@ -54,9 +54,9 @@ Issues and pull requests are welcome — whether that's fixing a broken link, ad
 
 ## License
 
-AGPLv3. See `LICENSE` for the full text.
+AGPLv3. See `[LICENSE]` for the full text.
 
-"Sudd Library" and the ANZ NEXUS name/logos are reserved separately — see `NOTICE.md`. Non-affiliation and no-warranty terms are in `DISCLAIMER.md`.
+"Sudd Library" and the ANZ NEXUS name/logos are reserved separately — see `[NOTICE.md]`. Non-affiliation and no-warranty terms are in `[DISCLAIMER.md]`.
 
 ## Contact
 
