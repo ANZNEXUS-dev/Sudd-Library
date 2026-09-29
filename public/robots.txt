@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sudd-library.anznexus.workers.dev/sitemap-index.xml
+Sitemap: https://sudd-library.pages.dev/sitemap-index.xml
