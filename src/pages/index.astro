@@ -18,9 +18,11 @@ const iconFor = { primary: 'primary', secondary: 'secondary', aes: 'aes' } as co
     <div class="hero-inner">
       <h1>The free <span>South Sudan</span> curriculum library</h1>
       <p class="hero-sub">
-        Lesson notes, schemes of work and past papers for Primary, Secondary and AES.
+        Free lesson notes, schemes of work and past papers for Primary, Secondary and AES.
+        No login, and it works offline.
       </p>
-        <form class="search-form" action="/search/" method="get" role="search">
+
+      <form class="search-form" action="/search/" method="get" role="search">
         <label for="home-q" class="sr-only">Search resources</label>
         <input
           id="home-q"
@@ -31,13 +33,6 @@ const iconFor = { primary: 'primary', secondary: 'secondary', aes: 'aes' } as co
         />
         <button type="submit">Search</button>
       </form>
-
-
-      <div class="reassure">
-        <span><span class="dot"></span>Works offline</span>
-        <span><span class="dot"></span>No login</span>
-        <span><span class="dot"></span>Free to access</span>
-      </div>
 
       {total > 0 && (
         <p class="hero-count"><strong>{total}</strong> resources and growing</p>
@@ -142,18 +137,7 @@ const iconFor = { primary: 'primary', secondary: 'secondary', aes: 'aes' } as co
     font-size: 15px;
     cursor: pointer;
   }
-  .reassure {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: #fff;
-  }
-  .reassure span { display: flex; align-items: center; gap: 6px; }
-  .dot { width: 5px; height: 5px; border-radius: 50%; background: #F5B800; }
-  .hero-count { margin: 16px 0 0; font-size: 14px; color: #fff; }
+  .hero-count { margin: 0; font-size: 14px; color: #fff; }
   .hero-count strong { color: #F5B800; font-size: 18px; }
   .hero-note { margin: 8px 0 0; font-size: 12px; opacity: 0.85; color: #fff; }
 
