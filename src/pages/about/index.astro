@@ -2,42 +2,146 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import { SITE } from '../../data/site';
+
+const waLink = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Hi, I would like to contribute to Sudd Library: ')}`;
+const mailLink = `mailto:${SITE.contactEmail}?subject=${encodeURIComponent('Sudd Library')}`;
 ---
-<BaseLayout title="About" description="What Sudd Library is and how it works.">
+<BaseLayout title="About" description="What Sudd Library is, who built it, and how it works.">
   <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
+
+  <section class="about-hero">
+    <div class="about-hero-inner">
+      <h1>Every South Sudanese learner deserves their own curriculum, free.</h1>
+      <p>
+        {SITE.name} puts lesson notes, schemes of work and past papers for the
+        national curriculum in one search. No login. No cost. Works offline.
+      </p>
+    </div>
+  </section>
+
   <section class="wrap about-body">
-    <h1>About {SITE.name}</h1>
+    <h2>Why it exists</h2>
     <p>
-      {SITE.name} is a free, open-access library of official textbooks, past papers,
-      schemes of work, and lesson notes for South Sudanese schools — Primary, Secondary,
-      and AES. No accounts, no login, no cost.
+      Many learners inside South Sudan, including displaced families, cannot easily
+      reach materials for their own curriculum. {SITE.name} exists to close that gap.
+      It is free to use, with no account and no data collected from you.
+    </p>
+
+    <h2>What you will find</h2>
+    <p>
+      Primary (P1 to P8), Secondary (S1 to S4) and AES, with lesson notes, schemes of
+      work and past papers. Textbooks link directly to the National Curriculum
+      Development Center (NCDC).
+    </p>
+
+    <h2>Is this official?</h2>
+    <p>
+      No. {SITE.name} follows the South Sudan national curriculum, but it is an
+      independent project. It is not run by the NCDC or the Ministry of General
+      Education and Instruction. Always use your official textbooks and your teacher's
+      guidance together with these materials.
+    </p>
+
+    <h2>How the materials are made</h2>
+    <p>
+      Notes and schemes of work are prepared from the official NCDC textbooks and
+      syllabus. AI tools help draft them, and each one is checked by a person before
+      it is published. If you spot a mistake, please tell us and we will correct it.
+    </p>
+
+    <h2>How it works</h2>
+    <p>
+      Search by class, subject or topic, open a resource and download it. After the
+      site has loaded once, it keeps working on a weak or missing connection. On your
+      phone, use "Add to home screen" to open it like an app.
+    </p>
+
+    <h2>Who is behind it</h2>
+    <p>
+      I am {SITE.author}, a South Sudanese refugee living in {SITE.location}, and a
+      computer science student. My own education was made possible by a sponsor, and
+      I built {SITE.name} so that more learners can reach theirs. The code is open
+      source on <a href={SITE.repoUrl}>GitHub</a>.
+    </p>
+
+    <h2>Questions</h2>
+    <details>
+      <summary>Is it free forever?</summary>
+      <p>Yes. There are no fees, no accounts and no adverts.</p>
+    </details>
+    <details>
+      <summary>Can I print and share the materials?</summary>
+      <p>
+        Yes, for teaching and learning. Please do not sell them. See the
+        <a href="/disclaimer/">disclaimer</a> for the full terms.
+      </p>
+    </details>
+    <details>
+      <summary>Does it work without internet?</summary>
+      <p>
+        Pages you have already opened stay available offline. Open the ones you need
+        while you have a connection.
+      </p>
+    </details>
+    <details>
+      <summary>Can teachers contribute?</summary>
+      <p>
+        Yes. Send your notes or past papers through WhatsApp or email and they will
+        be reviewed before being added.
+      </p>
+    </details>
+
+    <h2>Contact and support</h2>
+    <p>
+      Teachers can share notes and past papers, and anyone can report a broken link
+      or a mistake. <a href={waLink}>Message on WhatsApp</a> or
+      <a href={mailLink}>send an email</a>. Every message gets read.
     </p>
     <p>
-      Textbooks link directly to South Sudan's National Curriculum Development Center
-      (NCDC). Past papers, notes, and other materials are added directly by {SITE.org}
-      and, over time, by teachers who share what they have.
+      If your school, organisation or sponsor would like to support this work,
+      please get in touch using the same links.
     </p>
-    <p>
-      Found a broken link or have something to contribute? Use the WhatsApp link in the
-      footer — every message gets read.
-    </p>
-    <p>
-      See the <a href="/disclaimer/">disclaimer</a> for terms of use and how to request
-      a takedown.
+
+    <p class="about-small">
+      See the <a href="/disclaimer/">disclaimer</a> for terms of use and how to
+      request a takedown.
     </p>
   </section>
 </BaseLayout>
 
 <style>
+  .about-hero {
+    background: var(--deep, #0F4788);
+    color: #fff;
+    padding: 30px 18px 28px;
+  }
+  .about-hero-inner {
+    max-width: 60ch;
+    margin: 0 auto;
+  }
+  .about-hero h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(26px, 6vw, 40px);
+    line-height: 1.15;
+    margin: 0 0 12px;
+    color: #fff;
+  }
+  .about-hero p {
+    font-size: 16px;
+    line-height: 1.55;
+    margin: 0;
+    color: #fff;
+  }
   .about-body {
-    padding: 18px 18px 40px;
+    padding: 8px 18px 40px;
     max-width: 60ch;
   }
-  .about-body h1 {
+  .about-body h2 {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 22px;
-    margin: 8px 0 16px;
+    font-size: 18px;
+    margin: 24px 0 6px;
   }
   .about-body p {
     font-size: 14px;
@@ -46,4 +150,16 @@ import { SITE } from '../../data/site';
     margin: 0 0 14px;
   }
   .about-body a { color: var(--deep-hover); text-decoration: underline; }
+  details {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+    padding: 10px 0;
+  }
+  summary {
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  details p { margin: 8px 0 0; }
+  .about-small { margin-top: 26px; }
 </style>
