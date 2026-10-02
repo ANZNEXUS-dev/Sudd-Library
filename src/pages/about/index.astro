@@ -11,11 +11,13 @@ const mailLink = `mailto:${SITE.contactEmail}?subject=${encodeURIComponent('Sudd
 
   <section class="about-hero">
     <div class="about-hero-inner">
-      <h1>Every South Sudanese learner deserves their own curriculum, free.</h1>
+      <h1>The free <span>South Sudan</span> curriculum library</h1>
       <p>
-        {SITE.name} puts lesson notes, schemes of work and past papers for the
-        national curriculum in one search. No login. No cost. Works offline.
+        Lesson notes, schemes of work and past papers for Primary, Secondary and AES.
+        No login. No cost. Works offline.
       </p>
+      <a class="about-cta" href="/search/">Search resources</a>
+      <p class="about-note">Independent project, aligned to the NCDC curriculum.</p>
     </div>
   </section>
 
@@ -23,7 +25,7 @@ const mailLink = `mailto:${SITE.contactEmail}?subject=${encodeURIComponent('Sudd
     <h2>Why it exists</h2>
     <p>
       Many learners inside South Sudan, including displaced families, cannot easily
-      reach materials for their own curriculum. {SITE.name} exists to close that gap.
+      reach materials for their own curriculum. Sudd Library exists to close that gap.
       It is free to use, with no account and no data collected from you.
     </p>
 
@@ -36,9 +38,9 @@ const mailLink = `mailto:${SITE.contactEmail}?subject=${encodeURIComponent('Sudd
 
     <h2>Is this official?</h2>
     <p>
-      No. {SITE.name} follows the South Sudan national curriculum, but it is an
+      No. Sudd Library follows the South Sudan national curriculum, but it is an
       independent project. It is not run by the NCDC or the Ministry of General
-      Education and Instruction. Always use your official textbooks and your teacher's
+      Education and Instruction. Please use your official textbooks and your teacher's
       guidance together with these materials.
     </p>
 
@@ -58,9 +60,9 @@ const mailLink = `mailto:${SITE.contactEmail}?subject=${encodeURIComponent('Sudd
 
     <h2>Who is behind it</h2>
     <p>
-      I am {SITE.author}, a South Sudanese refugee living in {SITE.location}, and a
+      I am Anzuruku Jacob, a South Sudanese refugee living in Adjumani, Uganda, and a
       computer science student. My own education was made possible by a sponsor, and
-      I built {SITE.name} so that more learners can reach theirs. The code is open
+      I built Sudd Library so that more learners can reach theirs. The code is open
       source on <a href={SITE.repoUrl}>GitHub</a>.
     </p>
 
@@ -113,30 +115,38 @@ const mailLink = `mailto:${SITE.contactEmail}?subject=${encodeURIComponent('Sudd
   .about-hero {
     background: var(--deep, #0F4788);
     color: #fff;
-    padding: 30px 18px 28px;
+    padding: 34px 18px 30px;
+    text-align: center;
   }
-  .about-hero-inner {
-    max-width: 60ch;
-    margin: 0 auto;
-  }
+  .about-hero-inner { max-width: 60ch; margin: 0 auto; }
   .about-hero h1 {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(26px, 6vw, 40px);
-    line-height: 1.15;
-    margin: 0 0 12px;
+    font-size: clamp(30px, 8vw, 46px);
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin: 0 0 14px;
     color: #fff;
   }
+  .about-hero h1 span { color: #F5B800; }
   .about-hero p {
-    font-size: 16px;
-    line-height: 1.55;
-    margin: 0;
+    font-size: 17px;
+    line-height: 1.5;
+    margin: 0 0 20px;
     color: #fff;
   }
-  .about-body {
-    padding: 8px 18px 40px;
-    max-width: 60ch;
+  .about-cta {
+    display: inline-block;
+    background: #F5B800;
+    color: #0b2a52;
+    font-weight: 700;
+    padding: 12px 26px;
+    border-radius: 999px;
+    text-decoration: none;
   }
+  .about-hero .about-note { font-size: 13px; opacity: 0.85; margin: 16px 0 0; }
+
+  .about-body { padding: 8px 18px 40px; max-width: 60ch; }
   .about-body h2 {
     font-family: var(--font-display);
     font-weight: 700;
@@ -154,12 +164,7 @@ const mailLink = `mailto:${SITE.contactEmail}?subject=${encodeURIComponent('Sudd
     border-bottom: 1px solid rgba(128, 128, 128, 0.3);
     padding: 10px 0;
   }
-  summary {
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    color: var(--ink);
-  }
+  summary { font-size: 14px; font-weight: 600; cursor: pointer; color: var(--ink); }
   details p { margin: 8px 0 0; }
   .about-small { margin-top: 26px; }
 </style>
