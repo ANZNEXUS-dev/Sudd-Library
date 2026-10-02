@@ -15,7 +15,17 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
       const params = new URLSearchParams(window.location.search);
       const q = params.get('q') || '';
       if (window.PagefindUI) {
-        new window.PagefindUI({ element: '#search' });
+        new window.PagefindUI({
+  element: '#search',
+  showSubResults: true,
+  showImages: false,
+  translations: {
+    placeholder: 'Search by class, subject or topic, e.g. P6 Science, S2 Biology past paper',
+    zero_results: 'No results for [SEARCH_TERM]. Try the subject or class name, e.g. "P5 Mathematics".',
+    clear_search: 'Clear',
+    searching: 'Searching for [SEARCH_TERM]...',
+  },
+});
         if (q) {
           const input = document.querySelector('.pagefind-ui__search-input');
           if (input) {
