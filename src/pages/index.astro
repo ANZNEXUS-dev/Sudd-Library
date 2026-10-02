@@ -20,6 +20,17 @@ const iconFor = { primary: 'primary', secondary: 'secondary', aes: 'aes' } as co
       <p class="hero-sub">
         Lesson notes, schemes of work and past papers for Primary, Secondary and AES.
       </p>
+        <form class="search-form" action="/search/" method="get" role="search">
+        <label for="home-q" class="sr-only">Search resources</label>
+        <input
+          id="home-q"
+          name="q"
+          type="search"
+          placeholder="Try: P6 Science, S3 Biology"
+          autocomplete="off"
+        />
+        <button type="submit">Search</button>
+      </form>
 
 
       <div class="reassure">
