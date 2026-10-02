@@ -10,16 +10,39 @@ const recent = [...allResources]
   .sort((a, b) => b.data.dateAdded.valueOf() - a.data.dateAdded.valueOf())
   .slice(0, 6);
 
+const total = allResources.length;
 const iconFor = { primary: 'primary', secondary: 'secondary', aes: 'aes' } as const;
 ---
 <BaseLayout title={SITE.name} description={SITE.tagline}>
-  <section class="hero wrap">
-    <h1>{SITE.tagline}</h1>
-    <p class="hero-sub">{SITE.description}</p>
-    <div class="reassure">
-      <span><span class="dot"></span>Works offline</span>
-      <span><span class="dot"></span>No login</span>
-      <span><span class="dot"></span>Free to access</span>
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>The free <span>South Sudan</span> curriculum library</h1>
+      <p class="hero-sub">
+        Lesson notes, schemes of work and past papers for Primary, Secondary and AES.
+      </p>
+
+      <form class="search-form" action="/search/" method="get" role="search">
+        <label for="home-q" class="sr-only">Search resources</label>
+        <input
+          id="home-q"
+          name="q"
+          type="search"
+          placeholder="Try: P6 Science, S3 Biology, past paper"
+          autocomplete="off"
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      <div class="reassure">
+        <span><span class="dot"></span>Works offline</span>
+        <span><span class="dot"></span>No login</span>
+        <span><span class="dot"></span>Free to access</span>
+      </div>
+
+      {total > 0 && (
+        <p class="hero-count"><strong>{total}</strong> resources and growing</p>
+      )}
+      <p class="hero-note">Independent project, aligned to the NCDC curriculum.</p>
     </div>
   </section>
 
@@ -56,38 +79,84 @@ const iconFor = { primary: 'primary', secondary: 'secondary', aes: 'aes' } as co
         })}
       </div>
     ) : (
-      <p class="empty-note">Nothing uploaded yet — new resources will show up here as they're added.</p>
+      <p class="empty-note">Nothing uploaded yet. New resources will show up here as they are added.</p>
     )}
   </section>
 </BaseLayout>
 
 <style>
-  .hero { padding: 26px 18px 10px; }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .hero {
+    background: var(--deep, #0F4788);
+    color: #fff;
+    padding: 34px 18px 28px;
+    text-align: center;
+  }
+  .hero-inner { max-width: 60ch; margin: 0 auto; }
   .hero h1 {
     font-family: var(--font-display);
-    font-weight: 600;
-    font-size: clamp(24px, 5vw, 30px);
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    margin: 0 0 8px;
+    font-weight: 800;
+    font-size: clamp(30px, 8vw, 46px);
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+    color: #fff;
   }
+  .hero h1 span { color: #F5B800; }
   .hero-sub {
-    font-size: 14px;
-    color: var(--ink-60);
-    line-height: 1.55;
-    margin: 0 0 14px;
-    max-width: 46ch;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 20px;
+    color: #fff;
+  }
+  .search-form {
+    display: flex;
+    gap: 8px;
+    max-width: 480px;
+    margin: 0 auto 18px;
+  }
+  .search-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 14px;
+    font-size: 15px;
+    border: none;
+    border-radius: 999px;
+    background: #fff;
+    color: #111;
+  }
+  .search-form button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 999px;
+    background: #F5B800;
+    color: #0b2a52;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
   }
   .reassure {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
+    justify-content: center;
     font-family: var(--font-mono);
     font-size: 11px;
-    color: var(--ink-60);
+    color: #fff;
   }
   .reassure span { display: flex; align-items: center; gap: 6px; }
-  .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
+  .dot { width: 5px; height: 5px; border-radius: 50%; background: #F5B800; }
+  .hero-count { margin: 16px 0 0; font-size: 14px; color: #fff; }
+  .hero-count strong { color: #F5B800; font-size: 18px; }
+  .hero-note { margin: 8px 0 0; font-size: 12px; opacity: 0.85; color: #fff; }
+
   .level-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
   .recent-list { display: flex; flex-direction: column; }
   .recent-row {
@@ -108,20 +177,12 @@ const iconFor = { primary: 'primary', secondary: 'secondary', aes: 'aes' } as co
     flex-shrink: 0;
     margin-top: 2px;
   }
-  .recent-text-group {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
+  .recent-text-group { display: flex; flex-direction: column; gap: 2px; }
   .recent-text { font-size: 13px; color: var(--ink); line-height: 1.4; }
   .recent-subline {
     font-family: var(--font-mono);
     font-size: 10.5px;
     color: var(--ink-60);
   }
-  .empty-note {
-    font-size: 12.5px;
-    color: var(--ink-60);
-    line-height: 1.5;
-  }
+  .empty-note { font-size: 12.5px; color: var(--ink-60); line-height: 1.5; }
 </style>
