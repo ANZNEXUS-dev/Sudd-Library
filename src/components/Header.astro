@@ -17,14 +17,16 @@ const isHome = Astro.url.pathname === '/';
         <path d="M58,80 L50,90 L50,80 Z" fill="#148540" />
         <polygon points="50.0,8.0 53.64,18.98 65.22,19.06 55.9,25.92 59.4,36.94 50.0,30.2 40.6,36.94 44.1,25.92 34.78,19.06 46.36,18.98" fill="#F2C411" />
       </svg>
-      <span class="wordmark">{SITE.name}</span>
+<span class="wordmark">{SITE.name}</span>
     </a>
-    <form class="search-form" action="/search/" method="get">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" />
-      </svg>
-      <input type="text" name="q" placeholder="Try: P6 Science, S3 Biology" aria-label="Search resources" />
-    </form>
+    {!isHome && (
+      <form class="search-form" action="/search/" method="get">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" />
+        </svg>
+        <input type="text" name="q" placeholder="Try: P6 Science, S3 Biology" aria-label="Search resources" />
+      </form>
+    )}
   </div>
 </header>
 
