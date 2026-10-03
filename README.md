@@ -4,7 +4,7 @@ A free, open-source educational resource platform for South Sudanese teachers an
 
 Built after volunteering to teach in South Sudan and finding curriculum materials extremely hard to get hold of.
 
-**Live:** https://sudd-library.anznexus.workers.dev/
+**Live:** https://sudd-library.pages.dev/
 
 ## What's in it
 
@@ -31,7 +31,7 @@ No accounts, no login, no signup. Every resource is a direct link, reachable in 
 
 Textbooks are linked directly to NCDC rather than re-hosted, since their content is copyrighted. Everything else is stored in a public Cloudflare R2 bucket.
 
-Total recurring cost: $0.
+Currently $0 to run.
 
 ## Running locally
 
