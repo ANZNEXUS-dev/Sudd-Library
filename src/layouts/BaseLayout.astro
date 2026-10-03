@@ -10,7 +10,7 @@ interface Props {
   description?: string;
 }
 const { title, description = SITE.description } = Astro.props as Props;
-const pageTitle = title === SITE.name ? SITE.name : `${title} — ${SITE.name}`;
+const pageTitle = title === SITE.name ? SITE.name : `${title} | ${SITE.name}`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImageUrl = new URL('/og-banner.png', Astro.site).toString();
 const isHome = Astro.url.pathname === '/';
@@ -22,14 +22,14 @@ const isHome = Astro.url.pathname === '/';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-<link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#0F4788" />
-<link rel="canonical" href={canonicalUrl} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Sudd Library" />
+    <meta property="og:site_name" content="Sudd Library" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -55,10 +55,24 @@ const isHome = Astro.url.pathname === '/';
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js').catch(() => {
-            // Offline caching is a nice-to-have, not a requirement — fail quietly.
+            // Offline caching is optional, so fail quietly.
           });
         });
       }
     </script>
   </body>
 </html>
+
+<style is:global>
+  body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+  main {
+    flex: 1 0 auto;
+  }
+  footer {
+    margin-top: auto;
+  }
+</style>
