@@ -5,7 +5,7 @@ A free, open-source educational resource platform for South Sudanese teachers an
 Built after volunteering to teach in South Sudan and finding curriculum materials extremely hard to get hold of.
 
 **Live:** https://sudd-library.pages.dev/
-
+![Sudd Library homepage](screenshot.jpg)
 ## What's in it
 
 Primary (P1–P8), Secondary (S1–S4), and AES, each broken down by subject, then by resource type:
