@@ -4,7 +4,7 @@ export const SITE = {
   tagline: 'Lesson notes, schemes of work and past papers for South Sudan, all in one search.',
   description:
     'A free, open-access library of lesson notes, schemes of work, and past papers for South Sudanese schools.',
-  org: 'ANZ NEXUS',
+  org: 'Annzuruku Jacob',
   author: 'Anzuruku Jacob',
   repoUrl: 'https://github.com/ANZNEXUS-dev/sudd-library',
   contactEmail: 'anznexus00@gmail.com',
